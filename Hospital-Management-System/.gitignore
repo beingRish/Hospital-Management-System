@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Application Properties (Sensitive) ###
+src/main/resources/application.properties
+
+# Optional: also ignore YAML configs if used
+src/main/resources/application.yml
+src/main/resources/application-*.yml
+src/main/resources/application-*.properties
