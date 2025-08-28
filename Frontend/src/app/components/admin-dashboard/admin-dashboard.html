@@ -1,19 +1,32 @@
+<app-nav></app-nav>
 <div class="container">
-    <h1 class="text-center">Admin Dashboard</h1>
-    <table class="table table-dark table-striped">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Age</th>
-                <th scope="col">Blood</th>
-                <th scope="col">Prescription</th>
-                <th scope="col">Dose</th>
-                <th scope="col">Urgency</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (patient of patients; track patient.id) {
+    <hr>
+    <h2 style="text-align: center;margin-top: 20PX;">Admin Dashboard</h2>
+    <a style="color: rgb(86, 86, 86); font-size: x-large;">
+        <marquee behavior="scroll" direction="left">
+            Welcome to Admin Dashboard. Please find the patient list below!!. Click Appointments to view and update
+            Appointments, Click Add Appointment to add new Appointment</marquee>
+    </a>
+    <hr>
+    <input type="text" name="search" placeholder="Search">
+    <br>
+    <a style="color: rgb(86, 86, 86); font-size: xx-large;">Current Patient List in the Queue</a>
+    <div class="tableFixHead">
+        <br>
+        <table class="table table-light table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Blood</th>
+                    <th scope="col">Prescription</th>
+                    <th scope="col">Dose</th>
+                    <th scope="col">Urgency</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (patient of patients; track patient.id) {
                 <tr>
                     <th scope="row">{{patient.id}}</th>
                     <td>{{patient.name}}</td>
@@ -23,7 +36,8 @@
                     <td>{{patient.dose}}</td>
                     <td>{{patient.urgency}}</td>
                 </tr>
-            }
-        </tbody>
-    </table>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

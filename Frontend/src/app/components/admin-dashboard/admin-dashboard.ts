@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { PatientService } from '../../services/patient.service';
 import { Patient } from '../../models/patient';
+import { Nav } from '../nav/nav';
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [],
+  imports: [Nav],
   templateUrl: './admin-dashboard.html',
   styleUrl: './admin-dashboard.scss'
 })
@@ -19,6 +20,7 @@ export class AdminDashboard {
 
   getPatients() {
     this.patientService.getPatientList().subscribe(patients => {
+      debugger
       this.patients = patients;
     })
   }
