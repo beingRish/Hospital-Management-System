@@ -27,6 +27,11 @@ public class Medicine {
 		this.stock = stock;
 	}
 
+	public Medicine() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public long getId() {
 		return id;
 	}
