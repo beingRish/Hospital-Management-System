@@ -23,19 +23,21 @@
                     <th scope="col">Prescription</th>
                     <th scope="col">Dose</th>
                     <th scope="col">Urgency</th>
+                    <th scope="col">Fees</th>
                 </tr>
             </thead>
             <tbody>
-                @for (patient of patients; track patient.id) {
-                <tr>
-                    <th scope="row">{{patient.id}}</th>
-                    <td>{{patient.name}}</td>
-                    <td>{{patient.age}}</td>
-                    <td>{{patient.blood}}</td>
-                    <td>{{patient.prescription}}</td>
-                    <td>{{patient.dose}}</td>
-                    <td>{{patient.urgency}}</td>
-                </tr>
+                @for (patient of patients(); track trackByPatientId) {
+                    <tr>
+                        <th scope="row">{{patient.id}}</th>
+                        <td>{{patient.name}}</td>
+                        <td>{{patient.age}}</td>
+                        <td>{{patient.blood}}</td>
+                        <td>{{patient.prescription}}</td>
+                        <td>{{patient.dose}}</td>
+                        <td>{{patient.urgency}}</td>
+                        <td>{{patient.fees}}</td>
+                    </tr>
                 }
             </tbody>
         </table>

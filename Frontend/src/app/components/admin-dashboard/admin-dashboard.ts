@@ -1,28 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, effect, WritableSignal } from '@angular/core';
 import { PatientService } from '../../services/patient.service';
 import { Patient } from '../../models/patient';
 import { Nav } from '../nav/nav';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [Nav],
   templateUrl: './admin-dashboard.html',
-  styleUrl: './admin-dashboard.scss'
+  styleUrls: ['./admin-dashboard.scss'],
+  imports: [CommonModule, Nav],
 })
 export class AdminDashboard {
-  patients: Patient[] = [];
+  patients!: WritableSignal<Patient[]>;
 
-  constructor(private patientService: PatientService) { }
-
-  ngOnInit(): void {
-    this.getPatients();
-  }
-
-  getPatients() {
-    this.patientService.getPatientList().subscribe(patients => {
-      debugger
-      this.patients = patients;
+  constructor(private patientService: PatientService) {
+    effect(() => {
+      this.patients = this.patientService.patients;
     })
   }
 
+  ngOnInit(): void {
+    this.patientService.setPatients();
+  }
+
+  trackByPatientId(index: number, patient: Patient): number {
+    return patient.id;
+  }
 }
