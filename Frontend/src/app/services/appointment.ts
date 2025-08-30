@@ -7,7 +7,7 @@ import { Appointment } from '../models/appointment.model';
   providedIn: 'root'
 })
 export class AppointmentService {
-  private  baseUrl: string = "http://localhost:8080/api/v2";
+  private  baseUrl: string = "/v2";
   appointments: WritableSignal<Appointment[]> = signal<Appointment[]>([]);
   
   constructor(private httpClient: HttpClient) { }

@@ -7,7 +7,7 @@ import { Patient } from '../models/patient.model';
   providedIn: 'root'
 })
 export class PatientService {
-  private  baseUrl: string = "http://localhost:8080/api/v1";
+  private  baseUrl: string = "/v1";
   patients: WritableSignal<Patient[]> = signal<Patient[]>([]);
   
   constructor(private httpClient: HttpClient) { }
