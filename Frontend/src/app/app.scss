@@ -1,0 +1,11 @@
+mat-sidenav {
+  width: 220px;
+}
+
+mat-sidenav[ng-reflect-opened="false"] {
+  width: 70px !important; /* collapsed mode */
+}
+
+mat-icon {
+  font-size: 22px;
+}

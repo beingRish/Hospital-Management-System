@@ -15,6 +15,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -42,6 +45,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatNativeDateModule,
     MatPaginatorModule,
     MatSortModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTooltipModule,
   ],
   exports: [
     CommonModule,
@@ -65,6 +71,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatNativeDateModule,
     MatPaginatorModule,
     MatSortModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTooltipModule,
   ]
 })
 export class SharedModule { }

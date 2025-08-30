@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
-import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard';
 import { AppointmentComponent } from './components/appointment/appointment';
+import { PatientComponent } from './components/patient/patient';
 
 export const routes: Routes = [
     {   path: '', 
-        redirectTo: 'admin', 
+        redirectTo: 'patients', 
         pathMatch: 'full' 
     },
     {
-        path: 'admin',
-        component: AdminDashboardComponent
+        path: 'patients',
+        component: PatientComponent
     },
     {
         path: 'appointments',
