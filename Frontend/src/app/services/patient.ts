@@ -24,4 +24,8 @@ export class PatientService {
   addPatient(patient: Patient): Observable<Patient> {
     return this.httpClient.post<Patient>(`/v1/insert`, patient)
   }
+
+  deletePatient(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`/v1/patients/${id}`);
+  }
 }

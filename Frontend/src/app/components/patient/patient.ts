@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPatient } from '../add-patient/add-patient';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-patient',
@@ -20,7 +21,7 @@ import { AddPatient } from '../add-patient/add-patient';
 })
 export class PatientComponent {
   displayedColumns: string[] = [
-    'id', 'name', 'age', 'blood', 'prescription', 'dose', 'urgency', 'fees'
+    'id', 'name', 'age', 'blood', 'prescription', 'dose', 'urgency', 'fees', 'actions'
   ];
   dataSource = new MatTableDataSource<Patient>();
 
@@ -69,4 +70,36 @@ export class PatientComponent {
       }
     });
   }
+  
+    editPatient(patient: Patient) {
+      // this.openUpdatePatientDialog(patient); // if you already have update dialog
+    }
+  
+    deletePatient(id: number) {
+      this.OpenConfirmationDialog(id);
+    }
+  
+    OpenConfirmationDialog(id: number) {
+      Swal.fire({
+        title: '⚠️ Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.patientService.deletePatient(id).subscribe(response => {
+            console.log(response);
+            this.patientService.setPatients();
+          });
+          Swal.fire(
+            'Deleted!',
+            'The patient has been deleted.',
+            'success'
+          );
+        }
+      });
+    }
 }
