@@ -2,12 +2,16 @@ import { Component, effect, WritableSignal } from '@angular/core';
 import { PatientService } from '../../services/patient';
 import { Patient } from '../../models/patient.model';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../../shared/shared-module';
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.html',
   styleUrls: ['./admin-dashboard.scss'],
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+  ],
 })
 export class AdminDashboardComponent {
   patients!: WritableSignal<Patient[]>;
@@ -24,5 +28,9 @@ export class AdminDashboardComponent {
 
   trackByPatientId(index: number, patient: Patient): number {
     return patient.id;
+  }
+
+  openAddPatientDialog() {
+
   }
 }

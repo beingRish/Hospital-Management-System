@@ -7,7 +7,6 @@ import { Patient } from '../models/patient.model';
   providedIn: 'root'
 })
 export class PatientService {
-  private  baseUrl: string = "/v1";
   patients: WritableSignal<Patient[]> = signal<Patient[]>([]);
   
   constructor(private httpClient: HttpClient) { }
@@ -19,6 +18,6 @@ export class PatientService {
   }
 
   getPatientList(): Observable<Patient[]> {
-    return this.httpClient.get<Patient[]>(`${this.baseUrl}`)
+    return this.httpClient.get<Patient[]>(`/v1`)
   }
 }

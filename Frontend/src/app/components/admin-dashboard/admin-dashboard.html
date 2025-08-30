@@ -1,13 +1,29 @@
 <div class="container">
-    <hr>
-    <h2 style="text-align: center;margin-top: 20PX;">Admin Dashboard</h2>
-    <a style="color: rgb(86, 86, 86); font-size: x-large;">
-        <marquee behavior="scroll" direction="left">
-            Welcome to Admin Dashboard. Please find the patient list below!!. Click Appointments to view and update
-            Appointments, Click Add Appointment to add new Appointment</marquee>
-    </a>
-    <hr>
-    <input type="text" name="search" placeholder="Search">
+    <div class="pt-4 pb-4">
+        <mat-card class="dashboard-header">
+            <h2>📅 Admin Dashboard</h2>
+            <p class="welcome-text">
+                Welcome to Admin Dashboard. Please find the patient list below!
+            </p>
+            <div class="scroll-text">
+                <span>
+                    ✏️ Click <b>Update Patient</b> to update patients. |
+                    ➕ Click <b>Add Patient</b> to add a new one.
+                </span>
+            </div>
+        </mat-card>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <mat-form-field appearance="outline" class="w-25">
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="Search patients">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="openAddPatientDialog()">
+            + Add Patient
+        </button>
+    </div>
     <br>
     <a style="color: rgb(86, 86, 86); font-size: xx-large;">Current Patient List in the Queue</a>
     <div class="tableFixHead">

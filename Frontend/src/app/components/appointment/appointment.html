@@ -1,13 +1,18 @@
-
 <div class="container">
-    <hr>
-    <h2 style="text-align: center;margin-top: 20PX;">Appointment Dashboard</h2>
-    <a style="color: rgb(86, 86, 86); font-size: x-large;">
-        <marquee behavior="scroll" direction="left">
-            Welcome to Appointment Dashboard. Please find the appointment list below!!. Click Appointments to view and update
-            Appointments, Click Add Appointment to add new Appointment</marquee>
-    </a>
-    <hr>
+    <div class="pt-4 pb-4">
+        <mat-card class="dashboard-header">
+            <h2>📅 Appointment Dashboard</h2>
+            <p class="welcome-text">
+                Welcome to Appointment Dashboard. Please find the appointment list below!
+            </p>
+            <div class="scroll-text">
+                <span>
+                    ✏️ Click <b>Update Appointment</b> to update appointments. |
+                    ➕ Click <b>Add Patient</b> to add a new one.
+                </span>
+            </div>
+        </mat-card>
+    </div>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <mat-form-field appearance="outline" class="w-25">
             <mat-label>Search</mat-label>

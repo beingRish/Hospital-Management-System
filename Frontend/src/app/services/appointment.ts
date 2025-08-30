@@ -7,7 +7,6 @@ import { Appointment } from '../models/appointment.model';
   providedIn: 'root'
 })
 export class AppointmentService {
-  private  baseUrl: string = "/v2";
   appointments: WritableSignal<Appointment[]> = signal<Appointment[]>([]);
   
   constructor(private httpClient: HttpClient) { }
@@ -19,7 +18,7 @@ export class AppointmentService {
   }
 
   getAllAppointments(): Observable<Appointment[]> {
-    return this.httpClient.get<Appointment[]>(`${this.baseUrl}`)
+    return this.httpClient.get<Appointment[]>(`/v2`)
   }
   
 }
