@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-appointment',
@@ -16,7 +17,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class AppointmentComponent {
   displayedColumns: string[] = [
-    'id', 'name', 'age', 'symtomps', 'number'
+    'id', 'name', 'age', 'symtomps', 'number', 'actions'
   ];
   dataSource = new MatTableDataSource<Appointment>();
 
@@ -65,4 +66,35 @@ export class AppointmentComponent {
     });
   }
 
+  editAppointment(appointment: any) {
+    // this.openUpdateAppointmentDialog(appointment); // if you already have update dialog
+  }
+
+  deleteAppointment(id: number) {
+    this.OpenConfirmationDialog(id);
+  }
+
+  OpenConfirmationDialog(id: number) {
+    Swal.fire({
+      title: '⚠️ Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.appointmentService.deleteAppointment(id).subscribe(response => {
+          console.log(response);
+          this.appointmentService.setAppointments();
+        });
+        Swal.fire(
+          'Deleted!',
+          'The appointment has been deleted.',
+          'success'
+        );
+      }
+    });
+  }
 }

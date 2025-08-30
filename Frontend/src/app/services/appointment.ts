@@ -18,11 +18,15 @@ export class AppointmentService {
   }
 
   getAllAppointments(): Observable<Appointment[]> {
-    return this.httpClient.get<Appointment[]>(`/v2`)
+    return this.httpClient.get<Appointment[]>(`/v2`);
   }
 
   addAppointment(appointment: Appointment): Observable<Appointment> {
-    return this.httpClient.post<Appointment>(`/v2/insert`, appointment)
+    return this.httpClient.post<Appointment>(`/v2/insert`, appointment);
+  }
+
+  deleteAppointment(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`/v2/appointments/${id}`);
   }
   
 }

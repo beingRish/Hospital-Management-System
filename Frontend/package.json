@@ -31,8 +31,10 @@
     "@angular/material": "^20.2.1",
     "@angular/platform-browser": "^20.2.0",
     "@angular/router": "^20.2.0",
+    "@types/sweetalert": "^1.1.28",
     "bootstrap": "^5.3.8",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.22.5",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
