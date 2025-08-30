@@ -60,6 +60,7 @@ export class AppointmentComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('Appointment added!');
+        this.appointmentService.setAppointments();
       }
     });
   }

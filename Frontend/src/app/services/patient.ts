@@ -20,4 +20,8 @@ export class PatientService {
   getPatientList(): Observable<Patient[]> {
     return this.httpClient.get<Patient[]>(`/v1`)
   }
+  
+  addPatient(patient: Patient): Observable<Patient> {
+    return this.httpClient.post<Patient>(`/v1/insert`, patient)
+  }
 }

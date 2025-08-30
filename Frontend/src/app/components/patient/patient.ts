@@ -6,6 +6,8 @@ import { SharedModule } from '../../shared/shared-module';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { AddPatient } from '../add-patient/add-patient';
 
 @Component({
   selector: 'app-patient',
@@ -26,7 +28,11 @@ export class PatientComponent {
   @ViewChild(MatSort) sort!: MatSort;
   patients!: WritableSignal<Patient[]>;
 
-  constructor(private patientService: PatientService) {
+  constructor(
+    private patientService: PatientService,
+    private dialog: MatDialog,
+  )
+   {
     effect(() => {
       this.patients = this.patientService.patients;
       this.dataSource.data = this.patients();
@@ -52,6 +58,15 @@ export class PatientComponent {
   }
 
   openAddPatientDialog() {
+    const dialogRef = this.dialog.open(AddPatient, {
+      width: '600px'
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Patient added!');
+        this.patientService.setPatients();
+      }
+    });
   }
 }

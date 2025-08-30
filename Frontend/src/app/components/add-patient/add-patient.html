@@ -1,0 +1,49 @@
+<h2 mat-dialog-title> Add New Patient </h2>
+
+<form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content class="mat-typography">
+        <div class="row g-2">
+            <mat-form-field class="col-md-6" appearance="outline">
+                <mat-label> Name </mat-label>
+                <input matInput formControlName="name" required>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-6" appearance="outline">
+                <mat-label> Age </mat-label>
+                <input matInput type="number" formControlName="age" required>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4" appearance="outline">
+                <mat-label> Blood </mat-label>
+                <input matInput formControlName="blood" required>
+            </mat-form-field>
+            
+            <mat-form-field class="col-md-4" appearance="outline">
+                <mat-label> Dose </mat-label>
+                <input matInput formControlName="dose">
+            </mat-form-field>
+            
+            <mat-form-field class="col-md-4" appearance="outline">
+                <mat-label> Urgency </mat-label>
+                <input matInput formControlName="urgency">
+            </mat-form-field>
+            
+            <mat-form-field class="col-md-6" appearance="outline">
+                <mat-label> Prescription </mat-label>
+                <input matInput formControlName="prescription">
+            </mat-form-field>
+
+            <mat-form-field class="col-md-6" appearance="outline">
+                <mat-label> Fees </mat-label>
+                <input matInput formControlName="fees">
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close> Cancel </button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="patientForm.invalid">
+            Save
+        </button>
+    </mat-dialog-actions>
+</form>

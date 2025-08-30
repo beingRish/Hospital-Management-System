@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { AppointmentService } from '../../services/appointment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SharedModule } from '../../shared/shared-module';
+import { Appointment } from '../../models/appointment.model';
 
 @Component({
   selector: 'app-add-appointment',
@@ -26,11 +27,14 @@ export class AddAppointment {
     });
   }
 
+  saveAppointment() {
+    this.appointmentService.addAppointment(this.appointmentForm.value).subscribe((response: Appointment) => {
+      console.log(response);
+    });
+  }
+  
   onSubmit() {
-    if (this.appointmentForm.valid) {
-      console.log(this.appointmentForm.value);
-      
-      // ToDo: Handle form submission, e.g., save the appointment
-    }
+    this.saveAppointment();
+    this.dialogRef.close(true);
   }
 }

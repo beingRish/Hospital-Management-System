@@ -20,5 +20,9 @@ export class AppointmentService {
   getAllAppointments(): Observable<Appointment[]> {
     return this.httpClient.get<Appointment[]>(`/v2`)
   }
+
+  addAppointment(appointment: Appointment): Observable<Appointment> {
+    return this.httpClient.post<Appointment>(`/v2/insert`, appointment)
+  }
   
 }
