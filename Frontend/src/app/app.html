@@ -11,6 +11,11 @@
 
       <!-- Navigation Items -->
       <mat-nav-list class="flex-grow-1">
+        <a mat-list-item routerLink="/home" class="d-flex align-items-center">
+          <mat-icon>home</mat-icon>
+          <span *ngIf="isExpanded" class="ms-2">Home</span>
+        </a>
+
         <a mat-list-item routerLink="/patients" class="d-flex align-items-center">
           <mat-icon>people</mat-icon>
           <span *ngIf="isExpanded" class="ms-2">Patients</span>
