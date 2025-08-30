@@ -8,7 +8,16 @@
             Appointments, Click Add Appointment to add new Appointment</marquee>
     </a>
     <hr>
-    <input type="text" name="search" placeholder="Search">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <mat-form-field appearance="outline" class="w-25">
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="Search appointments">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="openAddAppointmentDialog()">
+            + Add Appointment
+        </button>
+    </div>
     <br>
     <a style="color: rgb(86, 86, 86); font-size: xx-large;">Current Appointmenent List in the Queue</a>
     <div class="tableFixHead">

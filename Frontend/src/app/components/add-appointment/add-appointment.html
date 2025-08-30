@@ -1,0 +1,34 @@
+<h2 mat-dialog-title> Add New Appointment </h2>
+
+<form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content class="mat-typography">
+        <div class="row g-3">
+            <mat-form-field class="col-md-6" appearance="outline">
+                <mat-label> Name </mat-label>
+                <input matInput formControlName="name" required>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-3" appearance="outline">
+                <mat-label> Age </mat-label>
+                <input matInput type="number" formControlName="age" required>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-3" appearance="outline">
+                <mat-label> Symtomps </mat-label>
+                <input matInput formControlName="symtomps" required>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-6" appearance="outline">
+                <mat-label> Number </mat-label>
+                <input matInput formControlName="number">
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close> Cancel </button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="appointmentForm.invalid">
+            Save
+        </button>
+    </mat-dialog-actions>
+</form>
