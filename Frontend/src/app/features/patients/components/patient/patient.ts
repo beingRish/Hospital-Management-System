@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddPatient } from '../add-patient/add-patient';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../../core/services/auth';
+import { SnackbarService } from '../../../../core/services/snackbar';
 
 @Component({
   selector: 'app-patient',
@@ -35,6 +36,7 @@ export class PatientComponent {
     private patientService: PatientService,
     private dialog: MatDialog,
     private authService: AuthService,
+    private snackbar: SnackbarService,
   )
    {
     effect(() => {
@@ -69,8 +71,9 @@ export class PatientComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('Patient added!');
         this.patientService.setPatients();
+        this.snackbar.success('Patient added! 🎉');
+
       }
     });
   }

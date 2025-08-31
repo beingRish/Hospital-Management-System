@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
 import { AppointmentService } from '../../services/appointment';
 import { AuthService } from '../../../../core/services/auth';
+import { SnackbarService } from '../../../../core/services/snackbar';
 
 @Component({
   selector: 'app-appointment',
@@ -31,6 +32,7 @@ export class AppointmentComponent {
     private appointmentService: AppointmentService,
     private dialog: MatDialog,
     private authService: AuthService,
+    private snackbar: SnackbarService,
   ) {
     effect(() => {
       this.appointments = this.appointmentService.appointments;
@@ -64,8 +66,8 @@ export class AppointmentComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('Appointment added!');
         this.appointmentService.setAppointments();
+        this.snackbar.success('Appointment added! 🎉');
       }
     });
   }
