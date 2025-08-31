@@ -19,9 +19,12 @@ export class Home {
 
   }
 
-  openLoginDialog() {
+  openLoginDialog(userType: string) {
     const dialogRef = this.dialog.open(Login, {
       width: '600px',
+      data: { 
+        userType: userType
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

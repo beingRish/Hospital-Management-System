@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { SharedModule } from '../../shared/shared-module';
+import { AuthService } from '../../core/services/auth';
 
 @Component({
   selector: 'app-admin',
@@ -9,15 +10,21 @@ import { SharedModule } from '../../shared/shared-module';
   styleUrl: './admin.scss'
 })
 export class Admin {
-    public isExpanded = true;
+  public isExpanded = true;
+
+  constructor(
+    private route: Router,
+    private authService: AuthService,
+  ) { }
+
 
   public toggleMenu() {
     this.isExpanded = !this.isExpanded;
   }
 
   logout() {
-    // Your logout logic here
-    console.log("User logged out");
+    this.authService.logout();
+    this.route.navigate(['/'])
   }
 
 }

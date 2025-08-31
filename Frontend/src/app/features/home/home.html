@@ -2,10 +2,10 @@
     <h2 class="mb-3">Welcome to Hospital Management</h2>
     <p class="text-muted mb-4">Choose how you want to login</p>
     <div class="d-flex gap-3">
-        <button mat-raised-button color="primary" (click)="openLoginDialog()">
+        <button mat-raised-button color="primary" (click)="openLoginDialog('admin')">
             <mat-icon>admin_panel_settings</mat-icon> Admin
         </button>
-        <button mat-raised-button color="accent" (click)="openLoginDialog()">
+        <button mat-raised-button color="accent" (click)="openLoginDialog('doctor')">
             <mat-icon>medical_services</mat-icon> Doctor
         </button>
     </div>

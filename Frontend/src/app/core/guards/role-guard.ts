@@ -8,7 +8,7 @@ export function RoleGuard(expectedRole: 'ADMIN' | 'DOCTOR'): CanActivateFn {
     const router = inject(Router);
 
     if (!authService.isLoggedIn()) {
-      router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+      router.navigate(['/unauthorized'], { queryParams: { returnUrl: state.url } });
       return false;
     }
 

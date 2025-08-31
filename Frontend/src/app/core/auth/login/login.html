@@ -1,4 +1,4 @@
-<h1 mat-dialog-title class="text-center">Login As Admin</h1>
+<h1 mat-dialog-title class="text-center">Login As {{data.userType === 'admin' ? 'Admin' : 'Doctor' }} </h1>
 
 <div>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" mat-dialog-content>
