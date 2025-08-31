@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPatient } from '../add-patient/add-patient';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../../../core/services/auth';
 
 @Component({
   selector: 'app-patient',
@@ -28,10 +29,12 @@ export class PatientComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   patients!: WritableSignal<Patient[]>;
+  userRole: 'ADMIN' | 'DOCTOR' | null = null;
 
   constructor(
     private patientService: PatientService,
     private dialog: MatDialog,
+    private authService: AuthService,
   )
    {
     effect(() => {
@@ -46,6 +49,7 @@ export class PatientComponent {
   }
 
   ngOnInit(): void {
+    this.userRole = this.authService.getUserRole();
     this.patientService.setPatients();
   }
 

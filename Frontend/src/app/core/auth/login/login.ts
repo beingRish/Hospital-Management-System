@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SharedModule } from '../../../shared/shared-module';
 import { AuthService } from '../../services/auth';
 import { Router } from '@angular/router';
+import { SnackbarService } from '../../services/snackbar';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class Login {
     private dialogRef: MatDialogRef<Login>,
     private authService: AuthService,
     private router: Router,
+    private snackbar: SnackbarService,
   ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -38,6 +40,7 @@ export class Login {
       this.authService.login(username, password).subscribe(success => {
         this.userRole = this.authService.getUserRole();
         if (success) {
+           this.snackbar.success('Login successful 🎉');
           if (this.userRole === "ADMIN") {
             this.router.navigate(['/admin']);
             this.dialogRef.close(true);
@@ -46,7 +49,7 @@ export class Login {
             this.dialogRef.close(true);
           }
         } else {
-          alert('Invalid credentials');
+          this.snackbar.error('Invalid credentials ❌');
         }
       });
     }

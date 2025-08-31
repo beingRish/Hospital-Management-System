@@ -1,9 +1,9 @@
 <div class="container">
     <div class="pt-4 pb-4">
         <mat-card class="dashboard-header">
-            <h2>📅 Patient Dashboard</h2>
+            <h2>📅 {{userRole === 'ADMIN' ? 'Admin' : 'Doctor'}} Dashboard</h2>
             <p class="welcome-text">
-                Welcome to Patient Dashboard. Please find the patient list below!
+                Welcome to {{userRole === 'ADMIN' ? 'Admin' : 'Doctor'}} Dashboard. Please find the patient list below!
             </p>
             <div class="scroll-text">
                 <span>

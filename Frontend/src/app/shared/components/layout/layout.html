@@ -1,8 +1,7 @@
 <mat-sidenav-container class="vh-100">
   <!-- Sidebar -->
-  <mat-sidenav #sidenav mode="side" [(opened)]="isExpanded" class="bg-light border-end">
+  <mat-sidenav #sidenav mode="side" [(opened)]="isExpanded" class="bg-light border-end" [style.width.px]="isExpanded ? 200 : 60">
     <div class="d-flex flex-column h-100">
-
       <!-- Menu Header -->
       <div class="p-3 border-bottom fw-bold text-center">
         <span *ngIf="isExpanded">Menu</span>
@@ -11,28 +10,16 @@
 
       <!-- Navigation Items -->
       <mat-nav-list class="flex-grow-1">
-        <a mat-list-item routerLink="/home" class="d-flex align-items-center">
-          <mat-icon>home</mat-icon>
-          <span *ngIf="isExpanded" class="ms-2">Home</span>
-        </a>
-
-        <a mat-list-item routerLink="/patients" class="d-flex align-items-center">
-          <mat-icon>people</mat-icon>
-          <span *ngIf="isExpanded" class="ms-2">Patients</span>
-        </a>
-
-        <a mat-list-item routerLink="/appointments" class="d-flex align-items-center">
-          <mat-icon>event</mat-icon>
-          <span *ngIf="isExpanded" class="ms-2">Appointments</span>
-        </a>
-
-        <a mat-list-item routerLink="/medicines" class="d-flex align-items-center">
-          <mat-icon>medical_services</mat-icon>
-          <span *ngIf="isExpanded" class="ms-2">Medicines</span>
+        <a *ngFor="let item of menuItems"
+           mat-list-item
+           [routerLink]="item.link"
+           class="d-flex align-items-center">
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <span *ngIf="isExpanded" class="ms-2">{{ item.label }}</span>
         </a>
       </mat-nav-list>
 
-      <!-- Logout (at bottom) -->
+      <!-- Logout -->
       <div class="p-3 border-top">
         <a mat-list-item (click)="logout()" class="d-flex align-items-center text-danger fw-bold">
           <mat-icon class="text-danger">logout</mat-icon>
@@ -45,7 +32,6 @@
   <!-- Main Content -->
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="d-flex justify-content-between">
-      <!-- Toggle Button + Title -->
       <div class="d-flex align-items-center">
         <button mat-icon-button (click)="toggleMenu()">
           <mat-icon>{{ isExpanded ? 'chevron_left' : 'chevron_right' }}</mat-icon>

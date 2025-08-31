@@ -8,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
 import { AppointmentService } from '../../services/appointment';
+import { AuthService } from '../../../../core/services/auth';
 
 @Component({
   selector: 'app-appointment',
@@ -24,10 +25,12 @@ export class AppointmentComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   appointments!: WritableSignal<Appointment[]>;
+  userRole: 'ADMIN' | 'DOCTOR' | null = null;
 
   constructor(
     private appointmentService: AppointmentService,
     private dialog: MatDialog,
+    private authService: AuthService,
   ) {
     effect(() => {
       this.appointments = this.appointmentService.appointments;
@@ -41,6 +44,7 @@ export class AppointmentComponent {
   }
 
   ngOnInit(): void {
+    this.userRole = this.authService.getUserRole();
     this.appointmentService.setAppointments();
   }
 

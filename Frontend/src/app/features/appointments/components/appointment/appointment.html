@@ -1,9 +1,9 @@
 <div class="container">
     <div class="pt-4 pb-4">
         <mat-card class="dashboard-header">
-            <h2>📅 Appointment Dashboard</h2>
+            <h2>📅 {{userRole === 'ADMIN' ? 'Admin' : 'Doctor'}} Dashboard</h2>
             <p class="welcome-text">
-                Welcome to Appointment Dashboard. Please find the appointment list below!
+                Welcome to {{userRole === 'ADMIN' ? 'Admin' : 'Doctor'}} Dashboard. Please find the appointment list below!
             </p>
             <div class="scroll-text">
                 <span>
