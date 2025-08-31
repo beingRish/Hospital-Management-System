@@ -8,12 +8,13 @@ import { NoAuthGuard } from './core/guards/no-auth-guard';
 import { Layout } from './shared/components/layout/layout';
 import { PatientComponent } from './features/patients/components/patient/patient';
 import { AppointmentComponent } from './features/appointments/components/appointment/appointment';
+import { MedicineComponent } from './features/medicines/components/medicine/medicine';
 
 const layoutChildren = [
   { path: '', redirectTo: 'patients', pathMatch: 'full' as 'full' },
   { path: 'patients', component: PatientComponent },
   { path: 'appointments', component: AppointmentComponent },
-  // { path: 'medicines', component: MedicineComponent },
+  { path: 'medicines', component: MedicineComponent },
 ];
 
 

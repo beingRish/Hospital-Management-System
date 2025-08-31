@@ -60,9 +60,11 @@
                 <th mat-header-cell *matHeaderCellDef> Actions </th>
                 <td mat-cell *matCellDef="let appointment">
                     <div class="d-flex gap-2">
-                        <button mat-icon-button class="bg-primary text-white" (click)="editAppointment(appointment)">
-                            <mat-icon>edit</mat-icon>
-                        </button>
+                        @if(userRole === 'DOCTOR') {
+                            <button mat-icon-button class="bg-primary text-white" (click)="editAppointment(appointment)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        }
                         <button mat-icon-button class="bg-danger text-white" (click)="deleteAppointment(appointment.id)">
                             <mat-icon>delete</mat-icon>
                         </button>

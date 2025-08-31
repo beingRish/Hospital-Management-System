@@ -1,0 +1,72 @@
+<p>medicine works!</p>
+<div class="container">
+    <div class="pt-4 pb-4">
+        <mat-card class="dashboard-header">
+            <h2>📅 {{userRole === 'ADMIN' ? 'Admin' : 'Doctor'}} Dashboard</h2>
+            <p class="welcome-text">
+                Welcome to {{userRole === 'ADMIN' ? 'Admin' : 'Doctor'}} Dashboard. Please find the medicine list below!
+            </p>
+            <div class="scroll-text">
+                <span>
+                    ✏️ Click <b>Update Medicine</b> to update medicine. |
+                    ➕ Click <b>Add Medicine</b> to add a new one.
+                </span>
+            </div>
+        </mat-card>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <mat-form-field appearance="outline" class="w-25">
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search medicines">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="openAddMedicineDialog()">
+            + Add Medicine
+        </button>
+    </div>
+
+    <div class="pb-3">
+        <a style="color: rgb(86, 86, 86); font-size: xx-large;">Current Medicine List in the Queue</a>
+    </div>
+
+    <div class="mat-elevation-z3">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-table-custom">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <td mat-cell *matCellDef="let medicine">{{ medicine.id }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="drugName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Drug Name </th>
+                <td mat-cell *matCellDef="let medicine">{{ medicine.drugName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="stock">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock </th>
+                <td mat-cell *matCellDef="let medicine">{{ medicine.stock }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let medicine">
+                    <div class="d-flex gap-2">
+                        <button mat-icon-button class="bg-primary text-white" (click)="editMedicine(medicine)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button class="bg-danger text-white" (click)="deleteMedicine(medicine.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+        </mat-paginator>
+    </div>
+</div>
