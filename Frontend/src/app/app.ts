@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
 import { SharedModule } from './shared/shared-module';
 import { CoreModule } from './core/core-module';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,20 +10,10 @@ import { CoreModule } from './core/core-module';
     RouterOutlet, 
     CoreModule, 
     SharedModule, 
-    RouterLink,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  public isExpanded = true;
 
-  public toggleMenu() {
-    this.isExpanded = !this.isExpanded;
-  }
-  
-  logout() {
-  // Your logout logic here
-  console.log("User logged out");
-}
 }

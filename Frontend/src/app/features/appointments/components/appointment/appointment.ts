@@ -1,13 +1,13 @@
 import { Component, effect, ViewChild, WritableSignal } from '@angular/core';
 import { Appointment } from '../../models/appointment.model';
-import { AppointmentService } from '../../services/appointment';
 import { AddAppointment } from '../add-appointment/add-appointment';
-import { SharedModule } from '../../shared/shared-module';
+import { SharedModule } from '../../../../shared/shared-module';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
+import { AppointmentService } from '../../services/appointment';
 
 @Component({
   selector: 'app-appointment',

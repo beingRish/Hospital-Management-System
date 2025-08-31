@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { SharedModule } from '../../shared/shared-module';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-doctor',
   imports: [SharedModule],
-  templateUrl: './home.html',
-  styleUrl: './home.scss'
+  templateUrl: './doctor.html',
+  styleUrl: './doctor.scss'
 })
-export class Home {
+export class Doctor {
 
 }

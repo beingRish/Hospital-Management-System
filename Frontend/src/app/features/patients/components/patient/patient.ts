@@ -2,7 +2,7 @@ import { Component, effect, ViewChild, WritableSignal } from '@angular/core';
 import { PatientService } from '../../services/patient';
 import { Patient } from '../../models/patient.model';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../shared/shared-module';
+import { SharedModule } from '../../../../shared/shared-module';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';

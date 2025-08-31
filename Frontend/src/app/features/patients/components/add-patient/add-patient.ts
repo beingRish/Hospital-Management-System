@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PatientService } from '../../services/patient';
 import { Patient } from '../../models/patient.model';
-import { SharedModule } from '../../shared/shared-module';
+import { SharedModule } from '../../../../shared/shared-module';
 
 @Component({
   selector: 'app-add-patient',

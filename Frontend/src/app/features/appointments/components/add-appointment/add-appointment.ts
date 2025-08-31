@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AppointmentService } from '../../services/appointment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { SharedModule } from '../../shared/shared-module';
+import { SharedModule } from '../../../../shared/shared-module';
 import { Appointment } from '../../models/appointment.model';
+import { AppointmentService } from '../../services/appointment';
 
 @Component({
   selector: 'app-add-appointment',
