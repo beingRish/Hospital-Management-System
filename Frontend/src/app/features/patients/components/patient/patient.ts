@@ -22,9 +22,7 @@ import { SnackbarService } from '../../../../core/services/snackbar';
   ],
 })
 export class PatientComponent {
-  displayedColumns: string[] = [
-    'id', 'name', 'age', 'blood', 'prescription', 'dose', 'urgency', 'fees', 'actions'
-  ];
+  displayedColumns: string[] = [];
   dataSource = new MatTableDataSource<Patient>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -53,6 +51,15 @@ export class PatientComponent {
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole();
     this.patientService.setPatients();
+    this.setColumns();
+  }
+
+  setColumns() {
+    if (this.userRole === 'ADMIN') {
+      this.displayedColumns = ['id', 'name', 'age', 'urgency', 'fees', 'actions'];
+    } else if (this.userRole === 'DOCTOR') {
+      this.displayedColumns = ['id', 'name', 'age', 'blood', 'prescription', 'dose', 'urgency', 'fees', 'actions'];
+    }
   }
 
   applyFilter(event: Event) {

@@ -17,17 +17,20 @@
                 <mat-label> Blood </mat-label>
                 <input matInput formControlName="blood" required>
             </mat-form-field>
-            
+
             <mat-form-field class="col-md-4" appearance="outline">
                 <mat-label> Dose </mat-label>
                 <input matInput formControlName="dose">
             </mat-form-field>
-            
+
             <mat-form-field class="col-md-4" appearance="outline">
-                <mat-label> Urgency </mat-label>
-                <input matInput formControlName="urgency">
+                <mat-label>Urgency</mat-label>
+                <mat-select formControlName="urgency" required>
+                    <mat-option value="yes">Yes</mat-option>
+                    <mat-option value="no">No</mat-option>
+                </mat-select>
             </mat-form-field>
-            
+
             <mat-form-field class="col-md-6" appearance="outline">
                 <mat-label> Prescription </mat-label>
                 <input matInput formControlName="prescription">
