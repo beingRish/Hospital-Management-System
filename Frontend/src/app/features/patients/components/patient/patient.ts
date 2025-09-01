@@ -7,10 +7,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { AddPatient } from '../add-patient/add-patient';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../../../core/services/auth';
 import { SnackbarService } from '../../../../core/services/snackbar';
+import { PatientForm } from '../patient-form/patient-form';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient',
@@ -35,8 +36,8 @@ export class PatientComponent {
     private dialog: MatDialog,
     private authService: AuthService,
     private snackbar: SnackbarService,
-  )
-   {
+    private router: Router,
+  ) {
     effect(() => {
       this.patients = this.patientService.patients;
       this.dataSource.data = this.patients();
@@ -66,54 +67,76 @@ export class PatientComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
+
   trackByPatientId(index: number, patient: Patient): number {
     return patient.id;
   }
 
-  openAddPatientDialog() {
-    const dialogRef = this.dialog.open(AddPatient, {
-      width: '600px'
+  openPatientFormDialog(isEdit: boolean, patient?: Patient) {
+    this.addQueryParams(isEdit, patient)
+    const dialogRef = this.dialog.open(PatientForm, {
+      width: '600px',
+      data: {
+        isEdit: isEdit,
+        patient: patient || null,
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.clearQueryParams();
       if (result) {
         this.patientService.setPatients();
-        this.snackbar.success('Patient added! 🎉');
-
+        this.snackbar.success(
+          isEdit ? 'Patient updated! ✨' : 'Patient added! 🎉'
+        );
       }
     });
   }
   
-    editPatient(patient: Patient) {
-      // this.openUpdatePatientDialog(patient); // if you already have update dialog
-    }
-  
-    deletePatient(id: number) {
-      this.OpenConfirmationDialog(id);
-    }
-  
-    OpenConfirmationDialog(id: number) {
-      Swal.fire({
-        title: '⚠️ Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.patientService.deletePatient(id).subscribe(response => {
-            console.log(response);
-            this.patientService.setPatients();
-          });
-          Swal.fire(
-            'Deleted!',
-            'The patient has been deleted.',
-            'success'
-          );
-        }
-      });
-    }
+  addQueryParams(isEdit: boolean, patient?: Patient) {
+      this.router.navigate([], {
+      // relativeTo: this.route,
+      queryParams: {
+        edit: isEdit,
+        id: patient ? patient.id : null
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  clearQueryParams() {
+    this.router.navigate([], {
+      // relativeTo: this.route,
+      queryParams: {},
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  deletePatient(id: number) {
+    this.OpenConfirmationDialog(id);
+  }
+
+  OpenConfirmationDialog(id: number) {
+    Swal.fire({
+      title: '⚠️ Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.patientService.deletePatient(id).subscribe(response => {
+          console.log(response);
+          this.patientService.setPatients();
+        });
+        Swal.fire(
+          'Deleted!',
+          'The patient has been deleted.',
+          'success'
+        );
+      }
+    });
+  }
 }

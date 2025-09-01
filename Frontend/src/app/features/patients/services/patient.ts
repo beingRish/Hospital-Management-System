@@ -28,4 +28,8 @@ export class PatientService {
   deletePatient(id: number): Observable<void> {
     return this.httpClient.delete<void>(`/v1/patients/${id}`);
   }
+
+  updatePatient(patientId: number, patient: Patient): Observable<Patient> {
+    return this.httpClient.put<Patient>(`/v1/patients/${patientId}`, patient);
+  }
 }
