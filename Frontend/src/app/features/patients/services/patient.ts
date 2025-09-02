@@ -29,7 +29,7 @@ export class PatientService {
     return this.httpClient.delete<void>(`/v1/patients/${id}`);
   }
 
-  updatePatient(patientId: number, patient: Patient): Observable<Patient> {
-    return this.httpClient.put<Patient>(`/v1/patients/${patientId}`, patient);
+  updatePatient(id: number, patient: Patient): Observable<Patient> {
+    return this.httpClient.put<Patient>(`/v1/patients/${id}`, patient);
   }
 }

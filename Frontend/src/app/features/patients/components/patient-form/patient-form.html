@@ -1,4 +1,4 @@
-<h2 mat-dialog-title> Add New Patient </h2>
+<h2 mat-dialog-title>{{isEdit ? 'Edit Patient' : 'Add New Patient'}}</h2>
 
 <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
     <mat-dialog-content class="mat-typography">

@@ -29,4 +29,8 @@ export class AppointmentService {
     return this.httpClient.delete<void>(`/v2/appointments/${id}`);
   }
   
+  updateAppointment(id: number, appointment: Appointment): Observable<Appointment> {
+    return this.httpClient.put<Appointment>(`/v2/appointments/${id}`, appointment);
+  }
+  
 }

@@ -56,11 +56,17 @@ export class PatientForm {
   savePatient() {
     if (this.isEdit && this.patient?.id) {
       this.patientService.updatePatient(this.patient.id, this.patientForm.value).subscribe((response: Patient) => {
-        this.dialogRef.close(true);
+        if(response) {
+          this.patientService.setPatients();
+          this.dialogRef.close(true);
+        }
       });
     } else {
       this.patientService.addPatient(this.patientForm.value).subscribe((response: Patient) => {
-        this.dialogRef.close(true);
+        if(response) {
+          this.patientService.setPatients();
+          this.dialogRef.close(true);
+        }
       });
     }
   }

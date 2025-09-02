@@ -85,7 +85,6 @@ export class PatientComponent {
     dialogRef.afterClosed().subscribe(result => {
       this.clearQueryParams();
       if (result) {
-        this.patientService.setPatients();
         this.snackbar.success(
           isEdit ? 'Patient updated! ✨' : 'Patient added! 🎉'
         );

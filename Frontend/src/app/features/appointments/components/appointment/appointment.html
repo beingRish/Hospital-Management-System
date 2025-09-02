@@ -19,7 +19,7 @@
             <input matInput (keyup)="applyFilter($event)" placeholder="Search appointments">
         </mat-form-field>
 
-        <button mat-raised-button color="primary" (click)="openAddAppointmentDialog()">
+        <button mat-raised-button color="primary" (click)="openAppointmentFormDialog(false)">
             + Add Appointment
         </button>
     </div>
@@ -61,7 +61,7 @@
                 <td mat-cell *matCellDef="let appointment">
                     <div class="d-flex gap-2">
                         @if(userRole === 'DOCTOR') {
-                            <button mat-icon-button class="bg-primary text-white" (click)="editAppointment(appointment)">
+                            <button mat-icon-button class="bg-primary text-white" (click)="openAppointmentFormDialog(true, appointment)">
                                 <mat-icon>edit</mat-icon>
                             </button>
                         }

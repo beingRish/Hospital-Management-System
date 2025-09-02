@@ -1,6 +1,5 @@
 import { Component, effect, ViewChild, WritableSignal } from '@angular/core';
 import { Appointment } from '../../models/appointment.model';
-import { AddAppointment } from '../add-appointment/add-appointment';
 import { SharedModule } from '../../../../shared/shared-module';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -10,6 +9,8 @@ import Swal from 'sweetalert2';
 import { AppointmentService } from '../../services/appointment';
 import { AuthService } from '../../../../core/services/auth';
 import { SnackbarService } from '../../../../core/services/snackbar';
+import { AppointmentForm } from '../appointment-form.html/appointment-form';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-appointment',
@@ -33,6 +34,9 @@ export class AppointmentComponent {
     private dialog: MatDialog,
     private authService: AuthService,
     private snackbar: SnackbarService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+
   ) {
     effect(() => {
       this.appointments = this.appointmentService.appointments;
@@ -60,7 +64,7 @@ export class AppointmentComponent {
   }
 
   openAddAppointmentDialog() {
-    const dialogRef = this.dialog.open(AddAppointment, {
+    const dialogRef = this.dialog.open(AppointmentForm, {
       width: '600px'
     });
 
@@ -71,9 +75,43 @@ export class AppointmentComponent {
       }
     });
   }
+  
+  openAppointmentFormDialog(isEdit: boolean, appointment?: Appointment) {
+    this.addQueryParams(isEdit, appointment)
+    const dialogRef = this.dialog.open(AppointmentForm, {
+      width: '600px',
+      data: {
+        isEdit: isEdit,
+        appointment: appointment || null,
+      }
+    });
 
-  editAppointment(appointment: any) {
-    // this.openUpdateAppointmentDialog(appointment); // if you already have update dialog
+    dialogRef.afterClosed().subscribe(result => {
+      this.clearQueryParams();
+      if (result) {
+        this.snackbar.success(
+          isEdit ? 'Appointment updated! ✨' : 'Appointment added! 🎉'
+        );
+      }
+    });
+  }
+  
+  addQueryParams(isEdit: boolean, appointment?: Appointment) {
+      this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        edit: isEdit,
+        id: appointment ? appointment.id : null
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  clearQueryParams() {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: {},
+    });
   }
 
   deleteAppointment(id: number) {
