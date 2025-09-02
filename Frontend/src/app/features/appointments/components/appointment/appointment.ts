@@ -62,19 +62,6 @@ export class AppointmentComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
-  openAddAppointmentDialog() {
-    const dialogRef = this.dialog.open(AppointmentForm, {
-      width: '600px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.appointmentService.setAppointments();
-        this.snackbar.success('Appointment added! 🎉');
-      }
-    });
-  }
   
   openAppointmentFormDialog(isEdit: boolean, appointment?: Appointment) {
     this.addQueryParams(isEdit, appointment)
