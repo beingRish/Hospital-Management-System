@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../../../../core/services/auth';
 import { SnackbarService } from '../../../../core/services/snackbar';
 import { PatientForm } from '../patient-form/patient-form';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient',
@@ -37,6 +37,7 @@ export class PatientComponent {
     private authService: AuthService,
     private snackbar: SnackbarService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) {
     effect(() => {
       this.patients = this.patientService.patients;
@@ -91,10 +92,10 @@ export class PatientComponent {
       }
     });
   }
-  
+
   addQueryParams(isEdit: boolean, patient?: Patient) {
-      this.router.navigate([], {
-      // relativeTo: this.route,
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
       queryParams: {
         edit: isEdit,
         id: patient ? patient.id : null
@@ -105,9 +106,8 @@ export class PatientComponent {
 
   clearQueryParams() {
     this.router.navigate([], {
-      // relativeTo: this.route,
+      relativeTo: this.activatedRoute,
       queryParams: {},
-      queryParamsHandling: 'merge',
     });
   }
 

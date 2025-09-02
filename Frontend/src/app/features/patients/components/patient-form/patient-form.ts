@@ -22,7 +22,7 @@ export class PatientForm {
     @Inject(MAT_DIALOG_DATA) public data: { isEdit: true | false, patient: Patient | null },
     private dialogRef: MatDialogRef<PatientForm>,
     private patientService: PatientService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
   ) {
     this.patientForm = this.fb.group({
       name: ['', Validators.required],
@@ -41,7 +41,7 @@ export class PatientForm {
       this.patient = this.data.patient ?? null;
     }
 
-    this.route.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(params => {
       if (params['edit'] !== undefined) {
         this.isEdit = params['edit'] === 'true';
         this.loadPatient();

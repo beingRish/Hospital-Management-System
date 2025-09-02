@@ -8,9 +8,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Medicine } from '../../models/medicine-model';
 import Swal from 'sweetalert2';
-import { AddMedicine } from '../add-medicine/add-medicine';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../../shared/shared-module';
+import { MedicineForm } from '../medicine-form/medicine-form';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-medicine',
@@ -35,6 +36,8 @@ export class MedicineComponent {
     private dialog: MatDialog,
     private authService: AuthService,
     private snackbar: SnackbarService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) {
     effect(() => {
       this.medicines = this.medicineService.medicines;
@@ -66,22 +69,43 @@ export class MedicineComponent {
     return medicine.id;
   }
 
-  openAddMedicineDialog() {
-    const dialogRef = this.dialog.open(AddMedicine, {
-      width: '600px'
+  openMedicineFormDialog(isEdit: boolean, medicine?: Medicine) {
+    this.addQueryParams(isEdit, medicine)
+    const dialogRef = this.dialog.open(MedicineForm, {
+      width: '600px',
+      data: {
+        isEdit: isEdit,
+        medicine: medicine || null,
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.clearQueryParams();
       if (result) {
-        this.medicineService.setMedicines();
-        this.snackbar.success('Medicine added! 🎉');
-
+        this.snackbar.success(
+          isEdit ? 'Medicine updated! ✨' : 'Medicine added! 🎉'
+        );
       }
     });
   }
 
-  editMedicine(medicine: Medicine) {
-    // this.openUpdateMedicineDialog(medicine); // if you already have update dialog
+  addQueryParams(isEdit: boolean, medicine?: Medicine) {
+    debugger
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: {
+        edit: isEdit,
+        id: medicine ? medicine.id : null
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  clearQueryParams() {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: {},
+    });
   }
 
   deleteMedicine(id: number) {

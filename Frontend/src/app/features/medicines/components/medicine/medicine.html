@@ -21,7 +21,7 @@
             <input matInput (keyup)="applyFilter($event)" placeholder="Search medicines">
         </mat-form-field>
 
-        <button mat-raised-button color="primary" (click)="openAddMedicineDialog()">
+        <button mat-raised-button color="primary" (click)="openMedicineFormDialog(false)">
             + Add Medicine
         </button>
     </div>
@@ -52,7 +52,7 @@
                 <th mat-header-cell *matHeaderCellDef> Actions </th>
                 <td mat-cell *matCellDef="let medicine">
                     <div class="d-flex gap-2">
-                        <button mat-icon-button class="bg-primary text-white" (click)="editMedicine(medicine)">
+                        <button mat-icon-button class="bg-primary text-white" (click)="openMedicineFormDialog(true, medicine)">
                             <mat-icon>edit</mat-icon>
                         </button>
                         <button mat-icon-button class="bg-danger text-white" (click)="deleteMedicine(medicine.id)">

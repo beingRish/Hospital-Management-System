@@ -30,4 +30,8 @@ export class MedicineService {
     return this.httpClient.delete<void>(`/v3/medicines/${id}`);
   }
   
+  updateMedicine(id: number, medicine: Medicine): Observable<Medicine> {
+    return this.httpClient.put<Medicine>(`/v3/medicines/${id}`, medicine);
+  }
+  
 }

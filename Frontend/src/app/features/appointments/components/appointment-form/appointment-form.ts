@@ -21,7 +21,7 @@ export class AppointmentForm {
     @Inject(MAT_DIALOG_DATA) public data: { isEdit: true | false, appointment: Appointment | null },
     private dialogRef: MatDialogRef<AppointmentForm>,
     private appointmentService: AppointmentService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
   ) {
     this.appointmentForm = this.fb.group({
       name: ['', Validators.required],
@@ -37,7 +37,7 @@ export class AppointmentForm {
       this.appointment = this.data.appointment ?? null;
     }
 
-    this.route.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(params => {
       if (params['edit'] !== undefined) {
         this.isEdit = params['edit'] === 'true';
         this.loadAppointment();

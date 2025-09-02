@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 import { AppointmentService } from '../../services/appointment';
 import { AuthService } from '../../../../core/services/auth';
 import { SnackbarService } from '../../../../core/services/snackbar';
-import { AppointmentForm } from '../appointment-form.html/appointment-form';
+import { AppointmentForm } from '../appointment-form/appointment-form';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
