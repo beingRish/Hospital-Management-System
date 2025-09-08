@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../../../../core/services/auth';
 import { SnackbarService } from '../../../../core/services/snackbar';
 import { PatientForm } from '../patient-form/patient-form';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-patient',
@@ -20,6 +20,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [
     CommonModule,
     SharedModule,
+    RouterLink,
   ],
 })
 export class PatientComponent {
@@ -113,6 +114,11 @@ export class PatientComponent {
 
   deletePatient(id: number) {
     this.OpenConfirmationDialog(id);
+  }
+
+  viewPatientDetail(id: number) {
+    const role = this.userRole?.toLowerCase();
+    this.router.navigate([`/${role}/patients`, id]);
   }
 
   OpenConfirmationDialog(id: number) {

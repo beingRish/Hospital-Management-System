@@ -54,7 +54,7 @@ public class PatientController {
 	@PutMapping("/patients/{id}")
 	public ResponseEntity<Patient> updatePatientById(@PathVariable long id, @RequestBody Patient patientDetails) throws AttributeNotFoundException {
 		Patient patient =  patientRepository.findById(id).orElseThrow(() -> new AttributeNotFoundException("Patient not found with id" + id));
-		
+
 		patient.setAge(patientDetails.getAge());
 		patient.setName(patientDetails.getName());
 		patient.setBlood(patientDetails.getBlood());
@@ -64,7 +64,12 @@ public class PatientController {
 		patient.setUrgency(patientDetails.getUrgency());
 		
 		Patient updatedPatient = patientRepository.save(patient);
-		
 		return ResponseEntity.ok(updatedPatient);
+	}
+
+	@GetMapping("/patients/{id}")
+	public ResponseEntity<Patient> viewPatientById(@PathVariable long id) throws AttributeNotFoundException {
+		Patient patient =  patientRepository.findById(id).orElseThrow(() -> new AttributeNotFoundException("Patient not found with id" + id));
+		return ResponseEntity.ok(patient);
 	}
 }

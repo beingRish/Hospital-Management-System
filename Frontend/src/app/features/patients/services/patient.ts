@@ -8,7 +8,8 @@ import { Patient } from '../models/patient.model';
 })
 export class PatientService {
   patients: WritableSignal<Patient[]> = signal<Patient[]>([]);
-  
+  patientDetail: WritableSignal<Patient | null> = signal<Patient | null>(null);
+
   constructor(private httpClient: HttpClient) { }
 
   setPatients(): void {
@@ -17,10 +18,16 @@ export class PatientService {
     })
   }
 
+  setPatientDetail(patientId: number) {
+    this.getPatientDetail(patientId).subscribe((patient: Patient) => {
+      this.patientDetail.set(patient);
+    })
+  }
+
   getPatientList(): Observable<Patient[]> {
     return this.httpClient.get<Patient[]>(`/v1`)
   }
-  
+
   addPatient(patient: Patient): Observable<Patient> {
     return this.httpClient.post<Patient>(`/v1/insert`, patient)
   }
@@ -31,5 +38,9 @@ export class PatientService {
 
   updatePatient(id: number, patient: Patient): Observable<Patient> {
     return this.httpClient.put<Patient>(`/v1/patients/${id}`, patient);
+  }
+
+  getPatientDetail(patientId: number): Observable<Patient> {
+    return this.httpClient.get<Patient>(`/v1/patients/${patientId}`);
   }
 }

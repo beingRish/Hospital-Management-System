@@ -9,10 +9,12 @@ import { Layout } from './shared/components/layout/layout';
 import { PatientComponent } from './features/patients/components/patient/patient';
 import { AppointmentComponent } from './features/appointments/components/appointment/appointment';
 import { MedicineComponent } from './features/medicines/components/medicine/medicine';
+import { PatientDetail } from './features/patients/components/patient-detail/patient-detail';
 
 const layoutChildren = [
   { path: '', redirectTo: 'patients', pathMatch: 'full' as 'full' },
   { path: 'patients', component: PatientComponent },
+  { path: 'patients/:id', component: PatientDetail },
   { path: 'appointments', component: AppointmentComponent },
   { path: 'medicines', component: MedicineComponent },
 ];
