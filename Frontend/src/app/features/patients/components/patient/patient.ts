@@ -20,7 +20,6 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
   imports: [
     CommonModule,
     SharedModule,
-    RouterLink,
   ],
 })
 export class PatientComponent {
@@ -116,7 +115,7 @@ export class PatientComponent {
     this.OpenConfirmationDialog(id);
   }
 
-  viewPatientDetail(id: number) {
+  viewPatient(id: number) {
     const role = this.userRole?.toLowerCase();
     this.router.navigate([`/${role}/patients`, id]);
   }

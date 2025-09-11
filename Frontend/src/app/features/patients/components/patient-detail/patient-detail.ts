@@ -1,4 +1,4 @@
-import { Component, effect, WritableSignal } from '@angular/core';
+import { Component, WritableSignal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Patient } from '../../models/patient.model';
 import { PatientService } from '../../services/patient';
@@ -19,18 +19,15 @@ import { SharedModule } from '../../../../shared/shared-module';
 export class PatientDetail { patient!: Patient;
   userRole: 'ADMIN' | 'DOCTOR' | null = null;
   patientDetail!: WritableSignal<Patient | null>;
-
+  
   constructor(
     private route: ActivatedRoute, 
     private patientService: PatientService,
     private authService: AuthService,
-  ) {
-    effect(() => {
-      this.patientDetail = this.patientService.patientDetail;
-    })
-  }
-
+  ) { }
+  
   ngOnInit(): void {
+    this.patientDetail = this.patientService.patientDetail;
     this.userRole = this.authService.getUserRole();
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {

@@ -2,27 +2,27 @@
     <mat-card class="p-4 shadow-lg rounded-3">
         <h2 class="mb-3">👁 Patient Details</h2>
 
-        <div *ngIf="patientDetail(); else loading">
-            <p><strong>ID:</strong> {{ patientDetail().id }}</p>
-            <p><strong>Name:</strong> {{ patientDetail().name }}</p>
-            <p><strong>Age:</strong> {{ patientDetail().age }}</p>
+        <div *ngIf="patientDetail() as patient; else loading">
+            <p><strong>ID:</strong> {{ patient.id }}</p>
+            <p><strong>Name:</strong> {{ patient.name }}</p>
+            <p><strong>Age:</strong> {{ patient.age }}</p>
 
             <!-- Doctor-only -->
             <ng-container *ngIf="userRole === 'DOCTOR'">
-                <p><strong>Blood:</strong> {{ patientDetail().blood }}</p>
-                <p><strong>Prescription:</strong> {{ patientDetail().prescription }}</p>
-                <p><strong>Dose:</strong> {{ patientDetail().dose }}</p>
+                <p><strong>Blood:</strong> {{ patient.blood }}</p>
+                <p><strong>Prescription:</strong> {{ patient.prescription }}</p>
+                <p><strong>Dose:</strong> {{ patient.dose }}</p>
             </ng-container>
 
             <!-- Admin-only -->
             <ng-container *ngIf="userRole === 'ADMIN'">
-                <p><strong>Fees:</strong> ₹{{ patientDetail().fees }}</p>
+                <p><strong>Fees:</strong> ₹{{ patient.fees }}</p>
             </ng-container>
 
             <p>
                 <strong>Urgency:</strong>
-                <span [ngClass]="patientDetail().urgency === 'yes' ? 'urgent' : 'normal'">
-                    {{ patientDetail().urgency }}
+                <span [ngClass]="patient.urgency === 'yes' ? 'urgent' : 'normal'">
+                    {{ patient.urgency }}
                 </span>
             </p>
         </div>
