@@ -105,6 +105,11 @@ export class AppointmentComponent {
     this.OpenConfirmationDialog(id);
   }
 
+  viewAppointment(id: number) {
+    const role = this.userRole?.toLowerCase();
+    this.router.navigate([`/${role}/appointments`, id]);
+  }
+
   OpenConfirmationDialog(id: number) {
     Swal.fire({
       title: '⚠️ Are you sure?',

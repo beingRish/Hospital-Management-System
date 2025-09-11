@@ -8,12 +8,19 @@ import { Appointment } from '../models/appointment.model';
 })
 export class AppointmentService {
   appointments: WritableSignal<Appointment[]> = signal<Appointment[]>([]);
+  appointmentDetail: WritableSignal<Appointment | null> = signal<Appointment | null>(null);
   
   constructor(private httpClient: HttpClient) { }
 
   setAppointments(): void {
     this.getAllAppointments().subscribe((appointments: Appointment[]) => {
       this.appointments.set(appointments);
+    })
+  }
+  
+  setAppointmentDetail(appointmentId: number) {
+    this.getAppointmentDetail(appointmentId).subscribe((appointment: Appointment) => {
+      this.appointmentDetail.set(appointment);
     })
   }
 
@@ -31,6 +38,10 @@ export class AppointmentService {
   
   updateAppointment(id: number, appointment: Appointment): Observable<Appointment> {
     return this.httpClient.put<Appointment>(`/v2/appointments/${id}`, appointment);
+  }
+  
+  getAppointmentDetail(appointmentId: number): Observable<Appointment> {
+    return this.httpClient.get<Appointment>(`/v2/appointments/${appointmentId}`);
   }
   
 }

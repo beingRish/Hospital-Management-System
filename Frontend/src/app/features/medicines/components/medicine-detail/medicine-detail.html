@@ -1,0 +1,19 @@
+<div class="container pt-4">
+    <mat-card class="p-4 shadow-lg rounded-3">
+        <h2 class="mb-3">👁 Medicine Details</h2>
+
+        <div *ngIf="medicineDetail() as medicine; else loading">
+            <p><strong>ID:</strong> {{ medicine.id }}</p>
+            <p><strong>Drug Name:</strong> {{ medicine.drugName }}</p>
+            <p><strong>Stock:</strong> {{ medicine.stock }}</p>
+        </div>
+
+        <ng-template #loading>
+            <p>Loading medicine details...</p>
+        </ng-template>
+
+        <div class="mt-3">
+            <button mat-raised-button color="primary" [routerLink]="['/', userRole?.toLowerCase(), 'patients']">⬅ Back to Medicine List</button>
+        </div>
+    </mat-card>
+</div>

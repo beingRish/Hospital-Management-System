@@ -63,8 +63,12 @@ public class AppointmentController {
 		appointment.setNumber(appointmentDetails.getNumber());
 		
 		Appointment updatedAppointment = appointmentsRepository.save(appointment);
-		
 		return ResponseEntity.ok(updatedAppointment);
 	}
-	
+
+	@GetMapping("/appointments/{id}")
+	public ResponseEntity<Appointment> viewAppointmentById(@PathVariable long id) throws AttributeNotFoundException {
+		Appointment appointment =  appointmentsRepository.findById(id).orElseThrow(() -> new AttributeNotFoundException("Appointment not found with id" + id));
+		return ResponseEntity.ok(appointment);
+	}
 }

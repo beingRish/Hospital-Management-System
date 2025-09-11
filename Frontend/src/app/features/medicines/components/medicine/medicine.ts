@@ -112,6 +112,11 @@ export class MedicineComponent {
     this.OpenConfirmationDialog(id);
   }
 
+  viewMedicine(id: number) {
+    const role = this.userRole?.toLowerCase();
+    this.router.navigate([`/${role}/medicines`, id]);
+  }
+
   OpenConfirmationDialog(id: number) {
     Swal.fire({
       title: '⚠️ Are you sure?',

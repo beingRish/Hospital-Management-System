@@ -66,6 +66,10 @@ public class MedicineController {
 		
 		return ResponseEntity.ok(updatedMedicine);
 	}
-	
 
+	@GetMapping("/medicines/{id}")
+	public ResponseEntity<Medicine> viewMedicineById(@PathVariable long id) throws AttributeNotFoundException {
+		Medicine medicine =  medicineRepository.findById(id).orElseThrow(() -> new AttributeNotFoundException("Medicine not found with id" + id));
+		return ResponseEntity.ok(medicine);
+	}
 }

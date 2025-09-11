@@ -7,14 +7,20 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class MedicineService {
-  
   medicines: WritableSignal<Medicine[]> = signal<Medicine[]>([]);
+  medicineDetail: WritableSignal<Medicine | null> = signal<Medicine | null>(null);
   
   constructor(private httpClient: HttpClient) { }
 
   setMedicines(): void {
     this.getMedicineList().subscribe((medicines: Medicine[]) => {
       this.medicines.set(medicines);
+    })
+  }
+
+  setMedicineDetail(medicineId: number) {
+    this.getMedicineDetail(medicineId).subscribe((medicine: Medicine) => {
+      this.medicineDetail.set(medicine);
     })
   }
 
@@ -32,6 +38,10 @@ export class MedicineService {
   
   updateMedicine(id: number, medicine: Medicine): Observable<Medicine> {
     return this.httpClient.put<Medicine>(`/v3/medicines/${id}`, medicine);
+  }
+
+  getMedicineDetail(medicineId: number): Observable<Medicine> {
+    return this.httpClient.get<Medicine>(`/v3/medicines/${medicineId}`);
   }
   
 }

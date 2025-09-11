@@ -10,13 +10,17 @@ import { PatientComponent } from './features/patients/components/patient/patient
 import { AppointmentComponent } from './features/appointments/components/appointment/appointment';
 import { MedicineComponent } from './features/medicines/components/medicine/medicine';
 import { PatientDetail } from './features/patients/components/patient-detail/patient-detail';
+import { AppointmentDetail } from './features/appointments/components/appointment-detail/appointment-detail';
+import { MedicineDetail } from './features/medicines/components/medicine-detail/medicine-detail';
 
 const layoutChildren = [
   { path: '', redirectTo: 'patients', pathMatch: 'full' as 'full' },
   { path: 'patients', component: PatientComponent },
   { path: 'patients/:id', component: PatientDetail },
   { path: 'appointments', component: AppointmentComponent },
+  { path: 'appointments/:id', component: AppointmentDetail },
   { path: 'medicines', component: MedicineComponent },
+  { path: 'medicines/:id', component: MedicineDetail },
 ];
 
 

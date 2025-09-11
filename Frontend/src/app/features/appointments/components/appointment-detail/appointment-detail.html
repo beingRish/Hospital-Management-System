@@ -1,0 +1,21 @@
+<div class="container pt-4">
+    <mat-card class="p-4 shadow-lg rounded-3">
+        <h2 class="mb-3">👁 Appointment Details</h2>
+
+        <div *ngIf="appointmentDetail() as appointment; else loading">
+            <p><strong>ID:</strong> {{ appointment.id }}</p>
+            <p><strong>Name:</strong> {{ appointment.name }}</p>
+            <p><strong>Age:</strong> {{ appointment.age }}</p>
+            <p><strong>Symtomps:</strong> {{ appointment.symtomps }}</p>
+            <p><strong>Number:</strong> {{ appointment.number }}</p>
+        </div>
+
+        <ng-template #loading>
+            <p>Loading appointment details...</p>
+        </ng-template>
+
+        <div class="mt-3">
+            <button mat-raised-button color="primary" [routerLink]="['/', userRole?.toLowerCase(), 'patients']">⬅ Back to Appointment List</button>
+        </div>
+    </mat-card>
+</div>
