@@ -1,10 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  constructor(
+    private http: HttpClient,
+  ) { }
 
   isLoggedIn(): boolean {
     const token = localStorage.getItem('token');
@@ -16,17 +21,24 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    // Dummy logic for example:
-    if (username === 'admin' && password === 'admin') {
-      localStorage.setItem('token', 'mock-token');
-      localStorage.setItem('role', 'ADMIN');
-      return of(true);
-    } else if (username === 'doctor' && password === 'doctor') {
-      localStorage.setItem('token', 'mock-token');
-      localStorage.setItem('role', 'DOCTOR');
-      return of(true);
-    }
-    return of(false);
+    const body = {
+      username: username,
+      password: password
+    };
+
+    return this.http.post<{ token: string; role: 'ADMIN' | 'DOCTOR' }>('/auth/login', body).pipe(
+      tap({
+        next: (response) => {
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('role', response.role);
+        },
+        error: (err) => {
+          console.error('Login failed:', err);
+        },
+      }),
+      map(() => true),
+      catchError(() => of(false))
+    );
   }
 
   logout() {
