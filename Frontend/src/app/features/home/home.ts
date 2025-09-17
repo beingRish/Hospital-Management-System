@@ -19,11 +19,11 @@ export class Home {
 
   }
 
-  openLoginDialog(userType: string) {
+  openLoginDialog(isRegisterMode: boolean) {
     const dialogRef = this.dialog.open(Login, {
       width: '600px',
       data: { 
-        userType: userType
+        isRegisterMode: isRegisterMode
       }
     });
 

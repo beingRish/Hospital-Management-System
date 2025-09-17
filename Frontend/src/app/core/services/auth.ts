@@ -41,6 +41,29 @@ export class AuthService {
     );
   }
 
+  register(username: string, password: string, role: string): Observable<boolean> {
+    const body = {
+      username: username,
+      password: password,
+      userType: role
+    };
+
+    return this.http.post('/users/register', body).pipe(
+      tap({
+        next: (response) => {
+          debugger
+          console.log('response:', response);
+        },
+        error: (err) => {
+          debugger
+          console.error('Registeration failed:', err);
+        },
+      }),
+      map(() => true),
+      catchError(() => of(false))
+    );;
+  }
+
   logout() {
     localStorage.clear();
   }
