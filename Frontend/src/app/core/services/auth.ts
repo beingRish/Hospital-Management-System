@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, tap } from 'rxjs';
+import { Storage } from './storage';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +10,16 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
+    private storage: Storage
   ) { }
 
   isLoggedIn(): boolean {
-    const token = localStorage.getItem('token');
+    const token = this.storage.getToken();
     return !!token;
   }
 
   getUserRole(): 'ADMIN' | 'DOCTOR' | null {
-    return (localStorage.getItem('role') as 'ADMIN' | 'DOCTOR' | null);
+    return (this.storage.getRole() as 'ADMIN' | 'DOCTOR' | null);
   }
 
   login(username: string, password: string): Observable<boolean> {
@@ -29,8 +31,8 @@ export class AuthService {
     return this.http.post<{ token: string; role: 'ADMIN' | 'DOCTOR' }>('/auth/login', body).pipe(
       tap({
         next: (response) => {
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('role', response.role);
+          this.storage.setToken(response.token);
+          this.storage.setRole(response.role);
         },
         error: (err) => {
           console.error('Login failed:', err);
@@ -65,7 +67,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.clear();
+    this.storage.clear();
   }
   
 }

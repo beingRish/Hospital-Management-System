@@ -3,8 +3,9 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { apiInterceptor } from './core/interceptors/api-interceptor';
+import { apiInterceptor } from './core/interceptors/api';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { authInterceptor } from './core/interceptors/auth';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,7 +13,10 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideHttpClient(
-      withInterceptors([apiInterceptor])
+      withInterceptors([
+        apiInterceptor,
+        authInterceptor,
+      ])
     ),
     provideAnimations(),
   ]
