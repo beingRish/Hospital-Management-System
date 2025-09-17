@@ -90,7 +90,6 @@ export class MedicineComponent {
   }
 
   addQueryParams(isEdit: boolean, medicine?: Medicine) {
-    debugger
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
       queryParams: {

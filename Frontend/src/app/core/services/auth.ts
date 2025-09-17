@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { Storage } from './storage';
 
 @Injectable({
@@ -23,10 +23,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<boolean> {
-    const body = {
-      username: username,
-      password: password
-    };
+    const body = { username, password };
 
     return this.http.post<{ token: string; role: 'ADMIN' | 'DOCTOR' }>('/auth/login', body).pipe(
       tap({
@@ -34,12 +31,11 @@ export class AuthService {
           this.storage.setToken(response.token);
           this.storage.setRole(response.role);
         },
-        error: (err) => {
-          console.error('Login failed:', err);
-        },
       }),
       map(() => true),
-      catchError(() => of(false))
+      catchError((error) => {
+        return throwError(() => error);
+      })
     );
   }
 
@@ -53,21 +49,18 @@ export class AuthService {
     return this.http.post('/users/register', body).pipe(
       tap({
         next: (response) => {
-          debugger
           console.log('response:', response);
-        },
-        error: (err) => {
-          debugger
-          console.error('Registeration failed:', err);
         },
       }),
       map(() => true),
-      catchError(() => of(false))
-    );;
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
   }
 
   logout() {
     this.storage.clear();
   }
-  
+
 }

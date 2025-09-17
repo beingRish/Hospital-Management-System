@@ -20,25 +20,24 @@ export class Login {
 
   constructor(
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) 
+    @Inject(MAT_DIALOG_DATA)
     public data: { isRegisterMode: boolean },
     private dialogRef: MatDialogRef<Login>,
     private authService: AuthService,
     private router: Router,
     private snackbar: SnackbarService,
-  ) {
-    this.initForm();
-  }
+  ) {}
   
   ngOnInit(): void {
     this.isRegisterMode = this.data.isRegisterMode;
+    this.initForm();
   }
-
+  
   initForm() {
     if (this.isRegisterMode) {
       this.loginForm = this.fb.group({
         username: ['', Validators.required],
-        role: ['', [Validators.required, Validators.required]],
+        role: ['', [Validators.required]],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required]
       }, { validators: this.passwordMatchValidator });
@@ -67,17 +66,15 @@ export class Login {
       const { username, role, password } = this.loginForm.value;
       this.authService.register(username, password, role).subscribe({
         next: (success: boolean) => {
-          if(success) {
+          if (success) {
             this.snackbar.success('Registration successful 🎉');
             this.toggleMode();
             this.dialogRef.close(true);
-          }  else {
-            this.snackbar.error('Registration failed ❌');
           }
         },
         error: (err) => {
-          console.error(err);
-          this.snackbar.error('An error occurred. Please try again.');
+          const message = err?.error?.error || err?.error?.message || 'An error occurred. Please try again.';
+          this.snackbar.error(message);
         }
       });
     } else {
@@ -92,13 +89,11 @@ export class Login {
             else if (this.userRole === "DOCTOR") this.router.navigate(['/doctor']);
 
             this.dialogRef.close(true);
-          } else {
-            this.snackbar.error('Invalid credentials ❌');
           }
         },
         error: (err) => {
-          console.error(err);
-          this.snackbar.error('An error occurred. Please try again.');
+          const message = err?.error || err?.error?.message || 'An error occurred. Please try again.';
+          this.snackbar.error(message);
         }
       });
     }
