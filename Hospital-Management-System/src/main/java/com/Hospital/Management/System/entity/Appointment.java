@@ -1,4 +1,4 @@
-package com.Hospital.Management.System.doclogin.entity;
+package com.Hospital.Management.System.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

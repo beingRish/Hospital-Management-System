@@ -1,8 +1,8 @@
 package com.Hospital.Management.System.security;
 
-import com.Hospital.Management.System.doclogin.repository.UserRepository;
+import com.Hospital.Management.System.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.Hospital.Management.System.doclogin.entity.User;
+import com.Hospital.Management.System.entity.User;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,7 +1,7 @@
-package com.Hospital.Management.System.doclogin.controller;
+package com.Hospital.Management.System.controller;
 
-import com.Hospital.Management.System.doclogin.entity.User;
-import com.Hospital.Management.System.doclogin.repository.UserRepository;
+import com.Hospital.Management.System.entity.User;
+import com.Hospital.Management.System.repository.UserRepository;
 import com.Hospital.Management.System.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

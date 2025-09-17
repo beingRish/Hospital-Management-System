@@ -1,4 +1,4 @@
-package com.Hospital.Management.System.doclogin.controller;
+package com.Hospital.Management.System.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,9 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Hospital.Management.System.doclogin.entity.Appointment;
-import com.Hospital.Management.System.doclogin.entity.Medicine;
-import com.Hospital.Management.System.doclogin.repository.MedicineRepository;
+import com.Hospital.Management.System.entity.Medicine;
+import com.Hospital.Management.System.repository.MedicineRepository;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
