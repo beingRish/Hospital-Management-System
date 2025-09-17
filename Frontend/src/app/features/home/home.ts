@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SharedModule } from '../../shared/shared-module';
 import { MatDialog } from '@angular/material/dialog';
-import { Login } from '../../core/auth/login/login';
+import { AuthComponent } from '../../core/components/auth/auth';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +20,7 @@ export class Home {
   }
 
   openLoginDialog(isRegisterMode: boolean) {
-    const dialogRef = this.dialog.open(Login, {
+    const dialogRef = this.dialog.open(AuthComponent, {
       width: '600px',
       data: { 
         isRegisterMode: isRegisterMode

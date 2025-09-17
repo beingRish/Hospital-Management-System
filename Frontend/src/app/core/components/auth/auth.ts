@@ -7,14 +7,14 @@ import { Router } from '@angular/router';
 import { SnackbarService } from '../../services/snackbar';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-auth',
   imports: [SharedModule],
-  templateUrl: './login.html',
-  styleUrls: ['./login.scss']
+  templateUrl: './auth.html',
+  styleUrls: ['./auth.scss']
 })
-export class Login {
+export class AuthComponent {
 
-  loginForm!: FormGroup;
+  authForm!: FormGroup;
   isRegisterMode = false;
   userRole: string | null = null;
 
@@ -22,7 +22,7 @@ export class Login {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA)
     public data: { isRegisterMode: boolean },
-    private dialogRef: MatDialogRef<Login>,
+    private dialogRef: MatDialogRef<AuthComponent>,
     private authService: AuthService,
     private router: Router,
     private snackbar: SnackbarService,
@@ -35,14 +35,14 @@ export class Login {
   
   initForm() {
     if (this.isRegisterMode) {
-      this.loginForm = this.fb.group({
+      this.authForm = this.fb.group({
         username: ['', Validators.required],
         role: ['', [Validators.required]],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required]
       }, { validators: this.passwordMatchValidator });
     } else {
-      this.loginForm = this.fb.group({
+      this.authForm = this.fb.group({
         username: ['', Validators.required],
         password: ['', Validators.required]
       });
@@ -60,10 +60,10 @@ export class Login {
   }
 
   onSubmit() {
-    if (!this.loginForm.valid) return;
+    if (!this.authForm.valid) return;
 
     if (this.isRegisterMode) {
-      const { username, role, password } = this.loginForm.value;
+      const { username, role, password } = this.authForm.value;
       this.authService.register(username, password, role).subscribe({
         next: (success: boolean) => {
           if (success) {
@@ -78,7 +78,7 @@ export class Login {
         }
       });
     } else {
-      const { username, password } = this.loginForm.value;
+      const { username, password } = this.authForm.value;
       this.authService.login(username, password).subscribe({
         next: (success: boolean) => {
           if (success) {
